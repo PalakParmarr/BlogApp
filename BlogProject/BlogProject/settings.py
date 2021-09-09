@@ -51,10 +51,11 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_auth.registration',
+    'phonenumber_field',
 
 ]
 SITE_ID = 1
-
+AUTH_USER_MODEL = "accounts.User"
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 MIDDLEWARE = [
