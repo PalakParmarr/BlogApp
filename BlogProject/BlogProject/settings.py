@@ -56,8 +56,14 @@ INSTALLED_APPS = [
 ]
 SITE_ID = 1
 AUTH_USER_MODEL = "accounts.User"
-ACCOUNT_EMAIL_VERIFICATION = 'none'
 
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'accounts.serializers.UserSerializer',
+}
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'accounts.serializers.CustomUserDetailsSerializer',
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -141,3 +147,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
