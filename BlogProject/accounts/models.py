@@ -5,6 +5,11 @@ Role = (
     ("author", "author"),
 )
 
+class TimeStamp(models.Model):
+    """create dates and update date fields in this model"""
+    created_at = models.DateField(auto_now_add=True, null=True)
+    update_at = models.DateField(auto_now_add=True, null=True)
+
 
 class User(AbstractUser):
     """Abstract User table"""
@@ -12,7 +17,8 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=122, null=True, blank=True)
     role = models.CharField(max_length=50, choices=Role, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    created_at = models.DateField()
 
     def __str__(self):
-        return str(self.email)
+        return str(self.first_name)
+
+
