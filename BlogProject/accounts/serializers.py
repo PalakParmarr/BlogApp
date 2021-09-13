@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_auth.registration.serializers import RegisterSerializer
-from accounts.models import Role,User
+from accounts.models import Role, User
 
 
 class UserSerializer(RegisterSerializer):
@@ -8,8 +8,6 @@ class UserSerializer(RegisterSerializer):
     last_name = serializers.CharField(max_length=122)
     role = serializers.ChoiceField(choices=Role)
     description = serializers.CharField(max_length=500)
-
-    # Define transaction.atomic to rollback the save operation in case of error
 
     def save(self, request):
         user = super().save(request)
@@ -19,6 +17,7 @@ class UserSerializer(RegisterSerializer):
         user.description = self.data.get('description') 
         user.save()
         return user
+
 
 class CustomUserDetailsSerializer(serializers.ModelSerializer):
 
@@ -32,5 +31,11 @@ class CustomUserDetailsSerializer(serializers.ModelSerializer):
             'role',
             'description',
         )
-        read_only_fields = ('pk','username', 'email','first_name',
-            'last_name')
+        read_only_fields = ('pk', 'username', 'email', 'first_name', 'last_name')
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
