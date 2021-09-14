@@ -14,6 +14,9 @@ class Categories(models.Model):
     updated_at = models.DateField(auto_now_add=True, null=True)
     image = models.ImageField()
 
+    def __str__(self):
+        return self.title
+
 
 class Article(models.Model):
     """article model for article to create, update, list"""
@@ -26,6 +29,9 @@ class Article(models.Model):
     created_at = models.DateField(auto_now_add=True, null=True)
     updated_at = models.DateField(auto_now_add=True, null=True)
 
+    def __str__(self):
+        return self.title
+
 
 class Comment(models.Model):
     """comment model to comment a message on article"""
@@ -33,3 +39,6 @@ class Comment(models.Model):
     comment = models.TextField()
     created_at = models.DateField(auto_now_add=True, null=True)
     updated_at = models.DateField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.user
