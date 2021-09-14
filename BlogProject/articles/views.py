@@ -30,7 +30,7 @@ class UserArticleListApi(LoginRequiredMixin, generics.ListAPIView):
         return Article.objects.filter(author=self.request.user)
 
 
-class ArticleUpdateApi(generics.RetrieveUpdateAPIView):
+class ArticleUpdateApi(LoginRequiredMixin, generics.RetrieveUpdateAPIView):
     """user can update thier articles"""
     serializer_class = ArticleCreateSerializer
 
@@ -38,7 +38,7 @@ class ArticleUpdateApi(generics.RetrieveUpdateAPIView):
         return Article.objects.filter(author=self.request.user)
 
 
-class ArticleDeleteApi(generics.DestroyAPIView):
+class ArticleDeleteApi(LoginRequiredMixin, generics.DestroyAPIView):
     serializer_class = ArticleSerializer
 
     def get_queryset(self):
