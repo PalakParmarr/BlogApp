@@ -22,8 +22,9 @@ class ArticleCreateApi(LoginRequiredMixin, generics.CreateAPIView):
 class UserArticleListApi(LoginRequiredMixin, generics.ListAPIView):
     """This view return a list of all the articles created by the currently authenticated user."""
     serializer_class = ArticleCreateSerializer
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title']
+    ordering_fields = ['title']
     pagination_class = CustomPagination
 
     def get_queryset(self):
@@ -48,8 +49,9 @@ class ArticleDeleteApi(LoginRequiredMixin, generics.DestroyAPIView):
 class GeneralArticleListApi(generics.ListAPIView):
     """general article list"""
     serializer_class = ArticleSerializer
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title', 'author__first_name']
+    ordering_fields = ['category', 'title']
 
     def get_queryset(self):
         return Article.objects.filter(status="publish")
