@@ -13,8 +13,11 @@ Role = (
 
 class TimeStamp(models.Model):
     """create dates and update date fields in this model"""
-    created_at = models.DateField(auto_now_add=True, null=True)
-    update_at = models.DateField(auto_now_add=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    update_at = models.DateTimeField(auto_now=True, null=True)
+
+    class Meta:
+        abstract = True
 
 
 class User(AbstractUser):

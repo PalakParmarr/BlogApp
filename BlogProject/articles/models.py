@@ -10,8 +10,6 @@ STATUS = (
 
 class Categories(TimeStamp):
     title = models.CharField(max_length=50)
-    created_at = models.DateField(auto_now_add=True, null=True)
-    updated_at = models.DateField(auto_now_add=True, null=True)
     image = models.ImageField()
 
     def __str__(self):
@@ -26,8 +24,6 @@ class Article(TimeStamp):
     category = models.ManyToManyField(Categories)
     status = models.CharField(choices=STATUS, max_length=20)
     image = models.ImageField()
-    created_at = models.DateField(auto_now_add=True, null=True)
-    updated_at = models.DateField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.title
@@ -38,8 +34,6 @@ class Comment(TimeStamp):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.TextField()
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    created_at = models.DateField(auto_now_add=True, null=True)
-    updated_at = models.DateField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.user
