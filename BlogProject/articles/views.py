@@ -1,6 +1,6 @@
 from rest_framework import generics
-from articles.serializer import ArticleCreateSerializer, ArticleSerializer
-from articles.models import Article
+from articles.serializer import ArticleCreateSerializer, ArticleSerializer, CategoriesSerializer
+from articles.models import Article, Categories
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import filters
 from .pagination import CustomPagination
@@ -55,3 +55,24 @@ class GeneralArticleListApi(generics.ListAPIView):
 
     def get_queryset(self):
         return Article.objects.filter(status="publish")
+
+# ----- categoires view-api ---------
+
+
+class CategoriesListApi(generics.ListAPIView):
+    serializer_class = CategoriesSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['title']
+    ordering_fields = ['title']
+
+    def get_queryset(self):
+        return Categories.objects.all()
+
+
+class CategoryArticleList(generics.ListAPIView):
+    """ general list api view to get categories wise articles"""
+    serializer_class = ArticleSerializer
+
+    def get_queryset(self):
+        category = self.kwargs['pk']
+        return Article.objects.filter(category__pk=category, status='publish')
