@@ -1,9 +1,15 @@
+from django.db.models.query import QuerySet
 from rest_framework import generics
-from articles.serializer import ArticleCreateSerializer, ArticleSerializer, CategoriesSerializer
-from articles.models import Article, Categories
+from articles.serializer import ArticleCreateSerializer,Comment1Serializer, ArticleSerializer, CategoriesSerializer, CommentSerializer
+from articles.models import Article, Categories, Comment
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import filters
 from .pagination import CustomPagination
+from rest_framework.permissions import (
+    IsAuthenticated,
+)
+from rest_framework.views import APIView
+from rest_framework.response import Response
 # Create your views here.
 
 
@@ -76,3 +82,21 @@ class CategoryArticleList(generics.ListAPIView):
     def get_queryset(self):
         category = self.kwargs['pk']
         return Article.objects.filter(category__pk=category, status='publish')
+
+# ----- comment
+
+class CommentCreateApi(generics.CreateAPIView):
+    serializer_class = CommentSerializer
+    # permission_classes = [IsAuthenticated]
+    queryset = Comment.objects.all()
+
+    def perform_create(self, serializer):
+        import code; code.interact(local=dict(globals(), **locals()))
+        serializer.save(user=self.request.user)
+
+
+class CommentListApi(generics.ListAPIView):
+    serializer_class = Comment1Serializer
+
+    def get_queryset(self):
+        return Comment.objects.all()

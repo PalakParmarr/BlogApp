@@ -31,7 +31,7 @@ class Article(TimeStamp):
 
 class Comment(TimeStamp):
     """comment model to comment a message on article"""
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     comment = models.TextField()
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
 
