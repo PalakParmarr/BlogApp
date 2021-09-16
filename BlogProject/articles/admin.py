@@ -1,5 +1,5 @@
 from django.contrib import admin
-from articles.models import Article, Comment, Categories
+from articles.models import Article, Categories, Comment
 # Register your models here.
 
 admin.site.register(Categories)

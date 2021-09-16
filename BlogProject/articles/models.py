@@ -36,4 +36,4 @@ class Comment(TimeStamp):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user
+        return str(self.user)
