@@ -34,6 +34,7 @@ class Comment(TimeStamp):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     comment = models.TextField()
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    name = models.CharField(max_length=20, default='Anonymous Users')
 
     def __str__(self):
-        return str(self.user)
+        return str(self.name)

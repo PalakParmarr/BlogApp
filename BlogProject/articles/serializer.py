@@ -1,5 +1,6 @@
+
 from rest_framework import serializers
-from articles.models import Article, Categories, Comment, STATUS
+from articles.models import Article, Categories, Comment
 
 # articles serializers
 
@@ -30,16 +31,17 @@ class CategoriesSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    #article_name = serializers.CharField(source='article.title')
-    article = serializers.ChoiceField(Article.objects.filter(status='publish'))
+    # article = serializers.SerializerMethodField()
+    # article = serializers.ChoiceField(Article.objects.filter(status='publish'))
+    # user = serializers.CharField(required=False,allow_blank=True)
 
     class Meta:
         model = Comment
-        fields = ['article', 'comment']
+        fields = ('name', 'article', 'comment')
 
-    # def get_article(self, obj):
-    #     article = Article.objects.filter(status='publish')
-    #     return article
+    # def get_article(self,obj):
+    #     a = Article.objects.filter(status= )
+    #     return count
 
 
 class Comment1Serializer(serializers.ModelSerializer):

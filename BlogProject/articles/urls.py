@@ -18,8 +18,8 @@ urlpatterns = [
     path('', GeneralArticleListApi.as_view()),
     path('categories/', CategoriesListApi.as_view()),
     path('categories/<int:pk>/', CategoryArticleList.as_view()),
-    path("comment/create/",CommentCreateApi.as_view()),
-    path("comment/list/",CommentListApi.as_view()),
+    path("comment/create/", CommentCreateApi.as_view()),
+    path("comment/list/", CommentListApi.as_view()),
     
 
 ]
