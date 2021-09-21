@@ -1,4 +1,3 @@
-
 from rest_framework import serializers
 from articles.models import Article, Categories, Comment
 
@@ -33,7 +32,7 @@ class CategoriesSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     article = serializers.PrimaryKeyRelatedField(queryset=Article.objects.filter(status='publish'))
-    
+
     class Meta:
         model = Comment
         fields = ('name', 'article', 'comment')
