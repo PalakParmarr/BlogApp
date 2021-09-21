@@ -6,6 +6,7 @@ from articles.models import Article, Categories, Comment
 
 
 class ArticleCreateSerializer(serializers.ModelSerializer):
+    """for create article"""
     class Meta:
         model = Article
         fields = ['id', 'title', 'content', 'category', 'status', 'image']
@@ -30,18 +31,18 @@ class CategoriesSerializer(serializers.ModelSerializer):
 # comment serializer
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.Serializer):
     # article = serializers.SerializerMethodField()
-    # article = serializers.ChoiceField(Article.objects.filter(status='publish'))
-    # user = serializers.CharField(required=False,allow_blank=True)
+    article = serializers.ChoiceField(Article.objects.filter(status='publish'))
+    name = serializers.CharField(max_length=20, default='Anonymous Users')
+    comment = serializers.CharField(max_length=500)
 
     class Meta:
         model = Comment
         fields = ('name', 'article', 'comment')
 
-    # def get_article(self,obj):
-    #     a = Article.objects.filter(status= )
-    #     return count
+    def create(self, validated_data):
+        return Comment.objects.create(**validated_data)
 
 
 class Comment1Serializer(serializers.ModelSerializer):
