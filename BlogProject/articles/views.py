@@ -5,9 +5,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.core import serializers
-from django.http import HttpResponse
-from rest_framework import status
 
 # Create your views here.
 
@@ -92,26 +89,26 @@ class CategoryArticleList(generics.ListAPIView):
 # ----- comment
 
 
-# class CommentCreateApi(generics.CreateAPIView):
-#     serializer_class = CommentSerializer
-#     # permission_classes = [IsAuthenticated]
-#     queryset = serializers.serialize('json', self.get_queryset())
+class CommentCreateApi(generics.CreateAPIView):
+    serializer_class = CommentSerializer
+    # permission_classes = [IsAuthenticated]
+    queryset = Comment.objects.all()
 
 
-class CommentCreateApi(APIView):
-    def get(self, request, format=None):
-        comment = Comment.objects.all()
-        print(comment)
-        data = serializers.serialize('json', comment, fields=('name','article','comment'))
-        return Response(data)
+# class CommentCreateApi(APIView):
+#     def get(self, request, format=None):
+#         comment = Comment.objects.all()
+#         print(comment)
+#         data = serializers.serialize('json', comment, fields=('name','article','comment'))
+#         return Response(data)
 
-    def post(self, request, format=None):
-        serializer = CommentSerializer(data=request.data)
-        print(serializer)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data) 
-        return Response(serializer.errors)
+#     def post(self, request, format=None):
+#         serializer = CommentSerializer(data=request.data)
+#         print(serializer)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors)
 
 
 class CommentListApi(generics.ListAPIView):
