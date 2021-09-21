@@ -95,7 +95,7 @@ class CategoryArticleList(generics.ListAPIView):
 # class CommentCreateApi(generics.CreateAPIView):
 #     serializer_class = CommentSerializer
 #     # permission_classes = [IsAuthenticated]
-#     queryset = Comment.objects.all()
+#     queryset = serializers.serialize('json', self.get_queryset())
 
 
 class CommentCreateApi(APIView):

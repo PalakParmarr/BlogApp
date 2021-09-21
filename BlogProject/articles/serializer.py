@@ -32,11 +32,8 @@ class CategoriesSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    # article = serializers.SerializerMethodField()
-    # article = serializers.ChoiceField(Article.objects.filter(status='publish'))
-    # name = serializers.CharField(max_length=20, default='Anonymous Users')
-    # comment = serializers.CharField(max_length=500)
-
+    article = serializers.PrimaryKeyRelatedField(queryset=Article.objects.filter(status='publish'))
+    
     class Meta:
         model = Comment
         fields = ('name', 'article', 'comment')
