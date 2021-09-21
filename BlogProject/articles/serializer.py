@@ -31,18 +31,15 @@ class CategoriesSerializer(serializers.ModelSerializer):
 # comment serializer
 
 
-class CommentSerializer(serializers.Serializer):
+class CommentSerializer(serializers.ModelSerializer):
     # article = serializers.SerializerMethodField()
-    article = serializers.ChoiceField(Article.objects.filter(status='publish'))
-    name = serializers.CharField(max_length=20, default='Anonymous Users')
-    comment = serializers.CharField(max_length=500)
+    # article = serializers.ChoiceField(Article.objects.filter(status='publish'))
+    # name = serializers.CharField(max_length=20, default='Anonymous Users')
+    # comment = serializers.CharField(max_length=500)
 
     class Meta:
         model = Comment
         fields = ('name', 'article', 'comment')
-
-    def create(self, validated_data):
-        return Comment.objects.create(**validated_data)
 
 
 class Comment1Serializer(serializers.ModelSerializer):
