@@ -1,1 +1,3 @@
 # BlogApp
+Blog APP USING DJANGO REST-FRAMEWORK 
+
