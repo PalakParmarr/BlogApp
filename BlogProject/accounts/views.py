@@ -7,7 +7,6 @@ from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
-
 class ChangePasswordView(generics.UpdateAPIView):
     serializer_class = ChangePasswordSerializer
     model = User
